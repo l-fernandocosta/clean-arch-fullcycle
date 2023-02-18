@@ -37,8 +37,6 @@ describe('test find customer usecase', () => {
     const customer_usecase = new FindCustomerUseCase(customer_repository);
     const isCreated = await customer_repository.create(customer);
 
-    console.log(isCreated);
-
     const input: InputFindCustomerDTO = {
       id: '123',
     };

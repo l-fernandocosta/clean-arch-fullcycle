@@ -12,8 +12,8 @@ export class UpdateCustomerUseCase {
     input: InputUpdateCustomerDTO
   ): Promise<OutputUpdateCustomerDTO> {
     const customer = await this.customer_repository.find(input.id);
-    customer.changeName(input.name);
 
+    customer.changeName(input.name);
     customer.changeAddress(
       new Address(
         input.address.street,

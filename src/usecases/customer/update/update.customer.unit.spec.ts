@@ -37,6 +37,7 @@ describe('unit tests customer unit spec', () => {
     const customer_update_usecase = new UpdateCustomerUseCase(
       customer_repository
     );
-    await customer_update_usecase.execute(input);
+    const updated = await customer_update_usecase.execute(input);
+    expect(updated.address.city).toBe('city updated');
   });
 });
