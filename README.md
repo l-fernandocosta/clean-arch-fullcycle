@@ -102,3 +102,21 @@ xml_result =  CategoryPresenter(output).to_xml();
 - SRP (Single Resposability Principle) => Mudam por razões diferentes.
 
 ---
+
+# Notification Pattern
+
+> If a failure is expected behavior, then you shouldn’t be using exceptions. (Martin Fowler)
+
+O problema com esse modelo de validações, é que ele indica apenas a primeira inconsistência encontrada. Imagine isso em um cenário onde o usuário deve preencher vários campos em um formulário, sendo que para cada campo existe uma validação com uma Exception sendo lançada e interrompendo as validações seguintes, provavelmente o usuário deverá fazer vários requests até resolver todos os erros de validação do formulário. É mais recomendável mostrar todos os erros de validação uma única vez e assim o usuário pode corrigir tudo de uma vez antes de submeter o próximo request.
+
+**Com isso, uma melhor abordagem para notificar mensagens da camada de domínio para o usuário seria usar Notification Pattern**!\*\*\*\*
+
+## Notification Pattern
+
+Para capturar as mensagens das validações de domínio podemos usar o Notification Pattern ou Domain Notifications como também é conhecido, que foi descrito por **Martin Fowler** em um [artigo](https://martinfowler.com/eaaDev/Notification.html) de 2004, onde ele também mostra um modelo de implementação em C# sem fazer lançamento de Exceptions.
+
+> When the presentation receives a response from the validation, **it needs to check the Notification to determine if there are errors**. If so it can pull information out of the Notification to display these errors to the user. (Martin Fowler)
+
+Ao constatar que a entidade está inválida, podemos adicionar suas mensagens de validação no contexto de notificações que foi injetado no construtor do Handler. Isso nos permite acumular as falhas e exibir todas ao mesmo tempo para o usuário. Com a entidade inválida não faz sentido avançar, então podemos interromper o fluxo de execução com um simples **return**.
+
+[Texto medium - Wellington Nascimento](https://medium.com/tableless/n%C3%A3o-lance-exceptions-em-seu-dom%C3%ADnio-use-notifications-70b31f7148d3)
