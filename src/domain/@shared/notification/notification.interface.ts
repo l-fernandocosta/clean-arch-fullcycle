@@ -1,4 +1,4 @@
-export interface NotificationError {
+export interface NotificationErrorProps {
   message: string;
   context: string;
 }

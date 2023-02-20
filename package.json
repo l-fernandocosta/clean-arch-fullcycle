@@ -14,7 +14,7 @@
   },
   "scripts": {
     "dev": "nodemon src/infrastructure/api/server.ts",
-    "test": "npm run tsc -- --noEmit && jest",
+    "test": "npm run tsc -- --noEmit && jest --detectOpenHandles",
     "tsc": "tsc"
   },
   "dependencies": {

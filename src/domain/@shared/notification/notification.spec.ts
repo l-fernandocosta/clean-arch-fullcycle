@@ -1,11 +1,11 @@
 import { Notification } from './notification';
-import { NotificationError } from './notification.interface';
+import { NotificationErrorProps } from './notification.interface';
 
 describe('unit test for notification', () => {
   it('should create a list of errors', () => {
     const notification = new Notification();
 
-    const error: NotificationError = {
+    const error: NotificationErrorProps = {
       message: 'Error message',
       context: 'customer',
     };
@@ -19,7 +19,7 @@ describe('unit test for notification', () => {
       },
     ]);
 
-    const second_error: NotificationError = {
+    const second_error: NotificationErrorProps = {
       message: 'Error message 2',
       context: 'customer',
     };
@@ -37,7 +37,7 @@ describe('unit test for notification', () => {
       },
     ]);
 
-    const third_error: NotificationError = {
+    const third_error: NotificationErrorProps = {
       message: 'error message 3',
       context: 'order',
     };
@@ -45,5 +45,28 @@ describe('unit test for notification', () => {
     notification.addError(third_error);
 
     expect(notification.error_by_context().length).toBe(3);
+  });
+  it('should check if notification has at least one error', () => {
+    const notification = new Notification();
+    const error = {
+      message: 'error message',
+      context: 'customer',
+    };
+
+    notification.addError(error);
+    expect(notification.has_error()).toBe(true);
+  });
+
+  it('should get all errors props`', () => {
+    const notification = new Notification();
+
+    const error = {
+      message: 'error message',
+      context: 'customer',
+    };
+
+    notification.addError(error);
+
+    expect(notification.get_errors()).toEqual([error]);
   });
 });
