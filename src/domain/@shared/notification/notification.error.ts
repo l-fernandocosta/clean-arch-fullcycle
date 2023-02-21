@@ -5,7 +5,6 @@ export class NotificationError extends Error {
     super(
       errors
         .map((error) => {
-          console.log(`${error.context}:${error.message}`, 'console aqui');
           return `${error.context} : ${error.message}`;
         })
         .join(',')
